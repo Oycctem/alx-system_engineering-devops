@@ -1,2 +1,2 @@
-absolute_path_name=$(pwd)
-echo "$absolute_path_name"
+#!/bin/bash
+echo "$(pwd)" 
