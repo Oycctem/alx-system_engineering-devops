@@ -4,10 +4,11 @@ counter=0
 # The loop
 while [ $counter -le 12 ]
 do
+  echo "Hour: $counter"
  counter1=1
  while [ $counter1 -le 59 ]
  do
-   printf "%02d:%02d\n" $counter $counter1
+   echo $counter1
    ((counter1++))
  done
  ((counter++))
