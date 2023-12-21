@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# A script that displays all the content of the current lib
+
+# The loop
+for file in *; do
+ [[ -f $file && $file != .* ]] && echo "${file#*-}"
+done
