@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# script that diplays Best School 10 times
+counter=0
+# the loop
+while [ $counter -1t 10 ]
+do
+ echo "Best School"
+ ((counter++))
+done
