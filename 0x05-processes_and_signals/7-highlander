@@ -4,5 +4,5 @@ while true
 do
   echo "infinity and beyond indefinitely"
   sleep 2
-  trep "echo I am invincible!!!" SIGTERM
+  trap "echo I am invincible!!!" SIGTERM
 done
