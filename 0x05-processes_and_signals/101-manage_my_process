@@ -33,7 +33,7 @@ case "$1" in
 	    echo "No running instance of $PROCESS_NAME found"
 	fi
 	;;
-     "restar")
+     "restart")
 	if [ -e "$PID_FILE" ]; then
 	    kill "$(cat "$PID_FILE")"
 	    rm "$PID_FILE"
