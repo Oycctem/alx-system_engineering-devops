@@ -28,7 +28,7 @@ case "$1" in
 	if [ -e "$PID_FILE" ]; then
 	    kill "$(cat "$PID_FILE")"
 	    rm "$PID_FILE"
-	    echo "$PROCESS_NAME stopeed"
+	    echo "$PROCESS_NAME stopped"
 	else
 	    echo "No running instance of $PROCESS_NAME found"
 	fi
@@ -48,6 +48,6 @@ case "$1" in
 	fi
 	;;
      *)
-	echo "Usage: $0 {start|stop|restart)"
+	echo "Usage: $PROCESS_NAME {start|stop|restart)"
 	;;
 esac
