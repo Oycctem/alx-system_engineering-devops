@@ -1,0 +1,3 @@
+Host Oycctem
+   IdentityFile ~/.ssh/school
+   PasswordAuthentication no
