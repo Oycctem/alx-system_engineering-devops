@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# A bash script that configures nginx server so that it refirects to another page
+if ! command -v nginx &> /dev/null; then
+    sudo apt update
+    sudo apt install -y nginx
+fi
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
+line="\\\trewrite ^/redirect_me http://oycctem.tech permanent;"
+sudo sed -i "26i $line" /etc/nginx/sites-available/default
+sudo service nginx restart
