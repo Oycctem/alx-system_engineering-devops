@@ -2,5 +2,6 @@
 # A bash that runs nginx as nginx user.
 sed -i 's/user\s*nginx;/user nginx;/' /etc/nginx/nginx.conf
 sed -i '/listen\s*80;/a listen 8080;' /etc/nginx/sites-available/default
+chmod 644 /etc/nginx/nginx.conf
+pkill apache2
 service nginx start
-echo "Nginx is now running as the nginx user and listening on port 8080."
