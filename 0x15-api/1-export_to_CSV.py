@@ -17,9 +17,7 @@ if __name__ == "__main__":
 
     filename = f"{employee_id}.csv"
     with open(filename, 'w', newline='') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         writer.writerow(["USER_ID", "USERNAME",
                          "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         writer.writerows(completed_tasks)
-
-    print(f"Data exported to {filename}")
