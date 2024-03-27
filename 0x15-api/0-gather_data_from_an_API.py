@@ -1,33 +1,45 @@
 #!/usr/bin/python3
 """ a Python script that for a given employee ID, returns information """
-import json
 import requests
-from sys import argv
+import sys
 
 
 if __name__ == "__main__":
+    url = 'https://jsonplaceholder.typicode.com/users/' + sys.argv[1]
+    # fetch data
+    response = requests.get(url)
+    # parse data
+    userdata = response.json()
+    # name
+    EMPLOYEE_NAME = userdata.get('name')
 
-    sessionReq = requests.Session()
+    all_todos_url = (
+        'https://jsonplaceholder.typicode.com/todos?userId=' +
+        sys.argv[1])
+    # the fetch data
+    all_todos_response = requests.get(all_todos_url)
+    # the parsing data
+    all_todos_data = all_todos_response.json()
+    # the TOTAL_NUMBER_OF_TASKS
+    TOTAL_NUMBER_OF_TASKS = len(all_todos_data)
 
-    idEmp = argv[1]
-    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idEmp)
-    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(idEmp)
+    todos_url = (
+        'https://jsonplaceholder.typicode.com/todos?userId=' +
+        sys.argv[1] +
+        '&completed=true')
 
-    employee = sessionReq.get(idURL)
-    employeeName = sessionReq.get(nameURL)
+    TASK_TITLE = []
+    # now we start to fetch data
+    todos_response = requests.get(todos_url)
+    # now we start to parse data
+    todos_data = todos_response.json()
+    for todo in todos_data:
+        TASK_TITLE.append(todo.get('title'))
+    # NUMBER_OF_DONE_TASKS
+    NUMBER_OF_DONE_TASKS = len(TASK_TITLE)
 
-    json_req = employee.json()
-    name = employeeName.json()['name']
-
-    totalTasks = 0
-
-    for done_tasks in json_req:
-        if done_tasks['completed']:
-            totalTasks += 1
-
-    print("Employee {} is done with tasks({}/{}):".
-          format(name, totalTasks, len(json_req)))
-
-    for done_tasks in json_req:
-        if done_tasks['completed']:
-            print("\t " + done_tasks.get('title'))
+    # printing the resaults
+    print(f'Employee {EMPLOYEE_NAME} is done with tasks\
+({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):')
+    for todo in TASK_TITLE:
+        print(f'\t {todo}')
