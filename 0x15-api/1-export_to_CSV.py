@@ -1,23 +1,20 @@
 #!/usr/bin/python3
 """ a Python script that for a given employee ID, returns information """
+import csv
 import requests
 import sys
-import csv
 
 if __name__ == "__main__":
+    user_id = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/"
-    employee_id = sys.argv[1]
-    user = requests.get(url + "users/{}".format(employee_id)).json()
-    todos = requests.get(url + "todos", params={"userId": employee_id}).json()
+    user = requests.get(url + "users/{}".format(user_id)).json()
+    username = user.get("username")
+    todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-    completed_tasks = [
-        (user.get("id"), user.get("name"), t.get("completed"), t.get("title"))
-        for t in todos if t.get("completed")
-    ]
-
-    filename = f"{employee_id}.csv"
-    with open(filename, 'w', newline='') as file:
-        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
-        writer.writerow(["USER_ID", "USERNAME",
-                         "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-        writer.writerows(completed_tasks)
+    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        for t in todos:
+            writer.writerow([
+                f"{user_id}", f"{username}",
+                f"{t.get('completed')}", f"{t.get('title')}"
+            ])
