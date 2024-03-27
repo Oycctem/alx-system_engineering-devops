@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ a Python script that for a given employee ID, returns information """
-import requests
 import json
+import requests
 
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
@@ -12,7 +12,9 @@ if __name__ == "__main__":
         user_id = user['id']
         username = user['username']
         todos = requests.get(url + "todos", params={"userId": user_id}).json()
-        user_tasks = [{"username": username, "task": todo["title"], "completed": todo["completed"]} for todo in todos]
+        user_tasks = [{"username": username,
+                       "task": todo["title"],
+                       "completed": todo["completed"]} for todo in todos]
         all_user_tasks[user_id] = user_tasks
 
     filename = "todo_all_employees.json"
