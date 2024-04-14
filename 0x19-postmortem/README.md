@@ -47,3 +47,7 @@ Enhance monitoring metrics.
 Update documentation.
 
 Schedule training sessions.
+
+![OIG3](https://github.com/Oycctem/alx-system_engineering-devops/assets/46654358/56717fa2-061f-45e0-b464-3a6436781891)
+
+
